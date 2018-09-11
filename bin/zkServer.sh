@@ -24,14 +24,20 @@
 
 # use POSIX interface, symlink is followed automatically
 ZOOBIN="${BASH_SOURCE-$0}"
+#bash
 ZOOBIN="$(dirname "${ZOOBIN}")"
 ZOOBINDIR="$(cd "${ZOOBIN}"; pwd)"
+
+# 以上三句就是获取到了当前目录
 
 if [ -e "$ZOOBIN/../libexec/zkEnv.sh" ]; then
   . "$ZOOBINDIR"/../libexec/zkEnv.sh
 else
   . "$ZOOBINDIR"/zkEnv.sh
 fi
+
+# 执行zkEnv.sh 配置环境，读取配置文件中的信息，检查java 环境
+
 
 # See the following page for extensive details on setting
 # up the JVM to accept JMX remote management:
@@ -90,7 +96,7 @@ if [ "x$(dirname "$ZOOCFG")" != "x$ZOOCFGDIR" ]
 then
     ZOOCFG="$2"
 fi
-
+# for windows 用户
 if $cygwin
 then
     ZOOCFG=`cygpath -wp "$ZOOCFG"`

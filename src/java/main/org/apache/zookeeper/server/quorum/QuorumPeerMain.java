@@ -66,6 +66,9 @@ import org.apache.zookeeper.server.quorum.QuorumPeerConfig.ConfigException;
  */
 @InterfaceAudience.Public
 public class QuorumPeerMain {
+    // log 很多地方都是这样获取一个log对象的，log依然是我心头的痛
+
+    // 来来，复习一下　static 关键字，　凡是static 修饰的，都属于　class ,而不属于任何该class 的object.所以　static 方法也只能调用static 修饰的变量，当然了，在静态对象中new object ,然后调用object对象的字段，随意
     private static final Logger LOG = LoggerFactory.getLogger(QuorumPeerMain.class);
 
     private static final String USAGE = "Usage: QuorumPeerMain configfile";
@@ -80,6 +83,7 @@ public class QuorumPeerMain {
     public static void main(String[] args) {
         QuorumPeerMain main = new QuorumPeerMain();
         try {
+            // 读取文件初始化，并开始运行
             main.initializeAndRun(args);
         } catch (IllegalArgumentException e) {
             LOG.error("Invalid arguments, exiting abnormally", e);
@@ -102,6 +106,8 @@ public class QuorumPeerMain {
             LOG.error("Unexpected exception, exiting abnormally", e);
             System.exit(ExitCode.UNEXPECTED_ERROR.getValue());
         }
+
+        // 正常退出
         LOG.info("Exiting normally");
         System.exit(ExitCode.EXECUTION_FINISHED.getValue());
     }
@@ -109,6 +115,7 @@ public class QuorumPeerMain {
     protected void initializeAndRun(String[] args)
         throws ConfigException, IOException, AdminServerException
     {
+        //解析配置文件，构建QuorumPeerConfig
         QuorumPeerConfig config = new QuorumPeerConfig();
         if (args.length == 1) {
             config.parse(args[0]);

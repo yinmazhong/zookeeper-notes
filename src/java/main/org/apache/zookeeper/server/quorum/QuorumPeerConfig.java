@@ -133,6 +133,8 @@ public class QuorumPeerConfig {
         LOG.info("Reading configuration from: " + path);
        
         try {
+
+            //这个工厂方法写的不错
             File configFile = (new VerifyingFileFactory.Builder(LOG)
                 .warnForRelativePath()
                 .failForNonExistingPath()
