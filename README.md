@@ -95,3 +95,9 @@ file -> new -> project from existing source -> 选中目录 -> 选择eclipse -> 
 ## 入口：
 
 zkServer.sh 启动脚本
+
+
+---
+
+9.12
+先做akka
